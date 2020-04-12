@@ -8,4 +8,5 @@ public interface StudentRepositoryI {
     boolean saveStudent(Student stu);
     List<Student> getStuList();
     Student getSingleStudent(String name);
+    boolean deleteStudent(String name);
 }

@@ -5,7 +5,6 @@ import com.grace.student.entities.Student;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class StudentRepository implements StudentRepositoryI {
 
@@ -33,7 +32,17 @@ public class StudentRepository implements StudentRepositoryI {
 
     @Override
     public Student getSingleStudent(String name) {
-        return stuList.stream().filter(item -> item.getName().equals(name)).findFirst().orElse(null);
+        return stuList.stream().filter(item -> item.getName().equals(name)).findAny().orElse(null);
+    }
+
+    @Override
+    public boolean deleteStudent(String name) {
+        if (null == getSingleStudent(name)) {
+            return false;
+        } else {
+            stuList.removeIf(item -> item.getName().equals(name));
+        }
+        return true;
     }
 
 }

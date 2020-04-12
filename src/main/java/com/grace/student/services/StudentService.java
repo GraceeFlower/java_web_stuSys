@@ -29,8 +29,16 @@ public class StudentService implements StudentServiceI {
     public Student getSingleStudent(String name) {
         Student stu = studentRepository.getSingleStudent(name);
         if (null == stu) {
-            throw new NullOfStudentException("该学生不存在！");
+            throw new NullOfStudentException("该学生不存在");
         }
         return stu;
+    }
+
+    @Override
+    public String deleteStudent(String name) {
+        if (!studentRepository.deleteStudent(name)) {
+            throw new NullOfStudentException("该学生不存在");
+        }
+        return "删除成功";
     }
 }

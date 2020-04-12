@@ -27,5 +27,8 @@ public class StudentController {
         return studentService.getSingleStudent(name);
     }
 
-
+    @DeleteMapping("system/remove/{name}")
+    public String deleteStudent(@PathVariable String name) {
+        return studentService.deleteStudent(name);
+    }
 }

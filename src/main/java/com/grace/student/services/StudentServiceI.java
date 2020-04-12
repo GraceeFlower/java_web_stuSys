@@ -9,4 +9,5 @@ public interface StudentServiceI {
     String saveStudent(Student stu);
     List<Student> getStuList();
     Student getSingleStudent(String name);
+    String deleteStudent(String name);
 }
