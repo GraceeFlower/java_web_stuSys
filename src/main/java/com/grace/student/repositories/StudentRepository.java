@@ -25,4 +25,9 @@ public class StudentRepository implements StudentRepositoryI {
         return isExist;
     }
 
+    @Override
+    public List<Student> getStuList() {
+        return stuList;
+    }
+
 }
