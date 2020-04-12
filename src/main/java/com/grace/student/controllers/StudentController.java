@@ -4,47 +4,35 @@ import com.grace.student.entities.Student;
 import com.grace.student.exceptions.AlreadyExistException;
 import com.grace.student.exceptions.NullOfStudentException;
 import com.grace.student.repositories.StudentRepository;
+import com.grace.student.services.StudentService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
 
-    private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping("/system/{name}")
     public Student getStudent(@PathVariable String name) {
-        Student stu = studentRepository.findByName(name);
-        if (null == stu) {
-            throw new NullOfStudentException("该学生不存在");
-        }
-        return stu;
+        return studentService.getStudent(name);
     }
 
     @GetMapping("/system/all")
     public Iterable<Student> getStudents() {
-        return studentRepository.findAll();
+        return studentService.getStudents();
     }
 
     @PostMapping("system/add")
     public String saveStudent(@RequestBody Student stu) {
-        if (null != studentRepository.findByName(stu.getName())) {
-            throw new AlreadyExistException("该学生已存在");
-        }
-        studentRepository.save(stu);
-        return "添加成功";
+        return studentService.saveStudent(stu);
     }
 
     @DeleteMapping("system/remove/{name}")
     public String deleteStudent(@PathVariable String name) {
-        Student stu = studentRepository.findByName(name);
-        if (null == stu) {
-            throw new NullOfStudentException("该学生不存在");
-        }
-        studentRepository.delete(stu);
-        return "删除成功";
+        return studentService.deleteStudent(name);
     }
 }
