@@ -1,18 +1,36 @@
 package com.grace.student.entities;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table("student")
 public class Student {
 
+    @Id
+    private int id;
+    @Column("sname")
     private String name;
     private String gender;
+    @Column("class")
     private String classNum;
 
-    public Student(String name, String gender, String classNum) {
+    public Student() {
+    }
+
+    public Student(int id, String name, String gender, String classNum) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.classNum = classNum;
     }
 
-    public Student() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,14 +55,5 @@ public class Student {
 
     public void setClassNum(String classNum) {
         this.classNum = classNum;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-            "name='" + name + '\'' +
-            ", gender='" + gender + '\'' +
-            ", classNum='" + classNum + '\'' +
-            '}';
     }
 }
