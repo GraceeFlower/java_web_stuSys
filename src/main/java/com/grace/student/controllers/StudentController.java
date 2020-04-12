@@ -3,10 +3,7 @@ package com.grace.student.controllers;
 import com.grace.student.entities.Student;
 import com.grace.student.services.StudentService;
 import com.grace.student.services.StudentServiceI;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,11 @@ public class StudentController {
     @GetMapping("system/all")
     public List<Student> getStuList() {
         return studentService.getStuList();
+    }
+
+    @GetMapping("system/{name}")
+    public Student getSingleStudent( @PathVariable String name) {
+        return studentService.getSingleStudent(name);
     }
 
 
